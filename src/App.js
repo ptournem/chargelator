@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ProjectChargeCalculatorApp from './js/ProjectChargeCalculatorApp.js';
 import { Grid, Navbar, Row, Col } from 'react-bootstrap';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
 		<Grid bsClass="container-fluid">
 			<Row>
 				<Col xs={10} xsOffset={1}>
+					<ProjectChargeCalculatorApp />
 				</Col>
 			</Row>
 		</Grid>
