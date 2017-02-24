@@ -22,8 +22,8 @@ class ProjectChargeCalculatorModel{
 	}
 
 	addFunction(moduleUuid){
-		this.modules = this.module.map((module) =>{
-			if(modules.uuid === moduleUuid){
+		this.modules = this.modules.map((module) =>{
+			if(module.uuid === moduleUuid){
 				module.addFunction()
 			}
 			return module;
