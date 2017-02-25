@@ -9,15 +9,7 @@ class ProjectChargeCalculatorApp extends Component {
 
 		this.state = {
 			project : 'Nouveau Projet',
-			modules : [{id:1, label : 'test', functions : [
-				{ id : 1 ,label : "fct 1", ihm : [0,1,2,4], traitement : [0,1,2,4]},
-				{ id : 2 ,label : "fct 2", ihm : [0,1,2,4], traitement : [0,1,2,4]},
-				{ id : 3 ,label : "fct 3", ihm : [0,1,2,4], traitement : [0,1,2,4]}
-			]},{id:2, label : 'test 2',functions : [
-				{ id : 1, label : "fct 1", ihm : [0,1,2,4], traitement : [0,1,2,4]},
-				{ id : 2, label : "fct 2", ihm : [0,1,2,4], traitement : [0,1,2,4]},
-				{ id : 3, label : "fct 3", ihm : [0,1,2,4], traitement : [0,1,2,4]}
-			]}]
+			modules : []
 		};
 
 		this.setProjectName = this.setProjectName.bind(this);
