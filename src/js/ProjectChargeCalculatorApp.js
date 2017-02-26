@@ -19,6 +19,7 @@ class ProjectChargeCalculatorApp extends Component {
 		this.addFunction = this.addFunction.bind(this);
 		this.setFunctionLabel  = this.setFunctionLabel.bind(this);
 		this.setFunctionCost = this.setFunctionCost.bind(this);
+		this.removeFunction = this.removeFunction.bind(this);
 	}
 	render(){
 		const modules = this.state.modules.map((module)=><ProjectChargeCalculatorModule key={module.id}
@@ -26,6 +27,7 @@ class ProjectChargeCalculatorApp extends Component {
 			onRemove={this.removeModule}
 			onSetLabel={this.setModuleLabel}
 			onAddFunction={this.addFunction}
+			onRemoveFunction={this.removeFunction}
 			onSetFunctionLabel={this.setFunctionLabel}
 			onSetFunctionCost={this.setFunctionCost} />);
 		return	(
@@ -88,9 +90,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	removeModule(uuid){
 		this.setState((prev)=>{
-			prev.modules = prev.modules.filter(function(el){
-				return el.id !== uuid;
-			});
+			prev.modules = prev.modules.filter((el) => el.id !== uuid); 
 
 			return prev;
 		});

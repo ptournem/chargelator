@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectChargeCalculatorUtils from './ProjectChargeCalculatorUtils.js';
+import{ Button, Glyphicon } from 'react-bootstrap';
 
 class ProjectChargeCalculatorFunction extends Component {
 	constructor(props){
@@ -21,6 +22,7 @@ class ProjectChargeCalculatorFunction extends Component {
 			<td><input type="number" value={this.props.function.traitement[2]} onChange={(evt)=>this.handleChangeCost(evt,false,2)}/></td>
 			<td><input type="number" value={this.props.function.traitement[3]} onChange={(evt)=>this.handleChangeCost(evt,false,3)}/></td>
 			<td><b>{ProjectChargeCalculatorUtils.getFunctionCost(this.props.function)}</b></td>
+			<td><Button bsStyle="danger" onClick={()=>this.props.onRemove(this.props.module,this.props.function.id)}><Glyphicon glyph="trash" /></Button></td>
 		</tr>;
 	}
 

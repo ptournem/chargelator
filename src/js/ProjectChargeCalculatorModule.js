@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import{ Panel, Table, Button, Glyphicon } from 'react-bootstrap';
+import{ Panel, Table, Button, Glyphicon ,Grid, Row, Col} from 'react-bootstrap';
 import ProjectChargeCalculatorFunction from './ProjectChargeCalculatorFunction.js';
 import ProjectChargeCalculatorUtils from './ProjectChargeCalculatorUtils.js'
 
@@ -20,30 +20,34 @@ class ProjectChargeCalculatorModule extends Component {
 			num={nb++}
 			function={func}
 			onSetLabel={this.props.onSetFunctionLabel}
+			onRemove={this.props.onRemoveFunction}
 			onSetCost={this.props.onSetFunctionCost} />);
 		return <Panel>
+			<Grid>
+				<Row>
+					<Col xs={8}>
+							<input type="text" value={this.props.module.label} onChange={this.handleSetLabel}/>
+					</Col>
+					<Col xs={2}>
+						{ProjectChargeCalculatorUtils.getModuleCost(this.props.module)} JEH
+					</Col>
+					<Col xs={1}>
+						<Button onClick={this.handleAddFunction} bsStyle="primary"><Glyphicon glyph="plus"/></Button>
+					</Col>
+					<Col xs={1}>
+						<Button onClick={this.handleRemove} bsStyle="danger"><Glyphicon glyph="trash"/></Button>
+					</Col>
+				</Row>
+			</Grid>
 			<Table fill responsive striped bordered className="moduleTable">
 			    <thead>
-						<tr>
-							<th colSpan={7}>
-								<input type="text" value={this.props.module.label} onChange={this.handleSetLabel}/>
-							</th>
-							<th>
-								Cost : {ProjectChargeCalculatorUtils.getModuleCost(this.props.module)}
-							</th>
-							<th>
-								<Button onClick={this.handleAddFunction}><Glyphicon glyph="plus"/> Ajouter Fonctionnalité</Button>
-							</th>
-							<th colSpan={2}>
-								<Button onClick={this.handleRemove}><Glyphicon glyph="trash"/> Supprimer Module</Button>
-							</th>
-						</tr>
 			      <tr>
 				  		<th rowSpan={2}>#</th>
 			        <th rowSpan={2}>Fonctionnalité</th>
 			        <th colSpan={4}>IHM</th>
 			        <th colSpan={4}>Traitement</th>
 							<th rowSpan={2}><b>Cout</b></th>
+							<th rowSpan={2}></th>
 			      </tr>
 				  	<tr>
 			        <th>Faible</th>
