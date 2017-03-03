@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import{ Button, Glyphicon , Well} from 'react-bootstrap';
-import ProjectChargeCalculatorModule from './ProjectChargeCalculatorModule.js'
-import ProjectChargeCalculatorUtils from './ProjectChargeCalculatorUtils.js'
+import{ Button, Glyphicon , Well, Row, Col} from 'react-bootstrap';
+import ProjectChargeCalculatorModule from './ProjectChargeCalculatorModule.js';
+import ProjectChargeCalculatorUtils from './ProjectChargeCalculatorUtils.js';
+import FileSaver from 'file-saver';
 
 class ProjectChargeCalculatorApp extends Component {
 	constructor(props){
@@ -20,6 +21,7 @@ class ProjectChargeCalculatorApp extends Component {
 		this.setFunctionLabel  = this.setFunctionLabel.bind(this);
 		this.setFunctionCost = this.setFunctionCost.bind(this);
 		this.removeFunction = this.removeFunction.bind(this);
+		this.saveAsJson = this.saveAsJson.bind(this);
 	}
 	render(){
 		const modules = this.state.modules.map((module)=><ProjectChargeCalculatorModule key={module.id}
@@ -32,10 +34,21 @@ class ProjectChargeCalculatorApp extends Component {
 			onSetFunctionCost={this.setFunctionCost} />);
 		return	(
 			<div>
-				<h1><input type="text" value={this.state.project} onChange={this.setProjectName} /></h1>
-				<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.modules)}</b> JEH</Well>
-				<Button onClick={this.addModule}><Glyphicon glyph="plus"/> Ajouter</Button>
-				{modules}
+				<Row>
+					<Col xs={10}>
+						<h1><input type="text" value={this.state.project} onChange={this.setProjectName} /></h1>
+					</Col>
+					<Col xs={2}>
+						<Button onClick={this.saveAsJson}  className="pull-right"><Glyphicon glyph="save"></Glyphicon></Button>
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={12}>
+						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.modules)}</b> JEH</Well>
+						<Button onClick={this.addModule}><Glyphicon glyph="plus"/> Ajouter</Button>
+						{modules}
+					</Col>
+				</Row>
 			</div>
 		);
 	}
@@ -184,6 +197,16 @@ class ProjectChargeCalculatorApp extends Component {
 
 			return prev;
 		});
+	}
+
+	/**
+	* Propose de télécharger le fichier .json correspondant au projet
+	*/
+	saveAsJson(){
+		// création du fichier
+		var file = new File([JSON.stringify(this.state)], this.state.project+".json", {type: "text/plain;charset=utf-8"});
+		// sauvegarde pour l'user
+		FileSaver.saveAs(file);
 	}
 }
 
