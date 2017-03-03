@@ -90,7 +90,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	removeModule(uuid){
 		this.setState((prev)=>{
-			prev.modules = prev.modules.filter((el) => el.id !== uuid); 
+			prev.modules = prev.modules.filter((el) => el.id !== uuid);
 
 			return prev;
 		});
@@ -103,7 +103,7 @@ class ProjectChargeCalculatorApp extends Component {
 		// on charge un uuid
 		const uuid= "fct_" + ProjectChargeCalculatorUtils.uuid();
 		this.setState((prev) => {
-			prev.module = prev.modules.map((module)=>{
+			prev.modules = prev.modules.map((module)=>{
 				// pour le bon module
 				if(module.id===mod){
 					// on ajoute une fonctionnalite
@@ -144,7 +144,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	setFunctionLabel(mod,func,label){
 		this.setState((prev) => {
-			prev.module = prev.modules.map((module)=>{
+			prev.modules = prev.modules.map((module)=>{
 				// Pour le bon module
 				if(module.id===mod){
 					module.functions.map((fct)=>{
@@ -167,7 +167,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	setFunctionCost(mod,func,ihm,traitement){
 		this.setState((prev) => {
-			prev.module = prev.modules.map((module)=>{
+			prev.modules = prev.modules.map((module)=>{
 				// pour le bon module
 				if(module.id===mod){
 					module.functions.map((fct)=>{
