@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import{ Button, Glyphicon , Well, Row, Col} from 'react-bootstrap';
+import{ Button, Glyphicon , Well, Row, Col, Alert} from 'react-bootstrap';
 import ProjectChargeCalculatorModule from './ProjectChargeCalculatorModule.js';
 import ProjectChargeCalculatorUtils from './ProjectChargeCalculatorUtils.js';
 import FileSaver from 'file-saver';
@@ -9,8 +9,12 @@ class ProjectChargeCalculatorApp extends Component {
 		super(props);
 
 		this.state = {
-			project : 'Nouveau Projet',
-			modules : []
+			project : {
+				label : 'Nouveau Projet',
+				modules : []
+			},
+			isDragging : false,
+			counterDrag : 0
 		};
 
 		this.setProjectName = this.setProjectName.bind(this);
@@ -22,9 +26,19 @@ class ProjectChargeCalculatorApp extends Component {
 		this.setFunctionCost = this.setFunctionCost.bind(this);
 		this.removeFunction = this.removeFunction.bind(this);
 		this.saveAsJson = this.saveAsJson.bind(this);
+		this.loadJson = this.loadJson.bind(this);
+		this.dragOver = this.dragOver.bind(this);
+		this.dragEnter = this.dragEnter.bind(this);
+		this.dragLeave = this.dragLeave.bind(this);
+	}
+
+	renderDroppingZone(){
+		return (<Alert bsStyle="info">
+          <h4>Vous pouvez glisser votre fichier pour qu'il soit pris en compte</h4>
+        </Alert>);
 	}
 	render(){
-		const modules = this.state.modules.map((module)=><ProjectChargeCalculatorModule key={module.id}
+		const modules = this.state.project.modules.map((module)=><ProjectChargeCalculatorModule key={module.id}
 			module={module}
 			onRemove={this.removeModule}
 			onSetLabel={this.setModuleLabel}
@@ -32,11 +46,14 @@ class ProjectChargeCalculatorApp extends Component {
 			onRemoveFunction={this.removeFunction}
 			onSetFunctionLabel={this.setFunctionLabel}
 			onSetFunctionCost={this.setFunctionCost} />);
+
+		const droppingAlert = this.state.isDragging=== true ? this.renderDroppingZone() : '';
 		return	(
-			<div>
+			<div onDrop={this.loadJson} onDragOver={this.dragOver} onDragEnter={this.dragEnter} onDragLeave={this.dragLeave}  >
+				{droppingAlert}
 				<Row>
 					<Col xs={10}>
-						<h1><input type="text" value={this.state.project} onChange={this.setProjectName} /></h1>
+						<h1><input type="text" value={this.state.project.label} onChange={this.setProjectName} /></h1>
 					</Col>
 					<Col xs={2}>
 						<Button onClick={this.saveAsJson}  className="pull-right"><Glyphicon glyph="save"></Glyphicon></Button>
@@ -44,7 +61,7 @@ class ProjectChargeCalculatorApp extends Component {
 				</Row>
 				<Row>
 					<Col xs={12}>
-						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.modules)}</b> JEH</Well>
+						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.project.modules)}</b> JEH</Well>
 						<Button onClick={this.addModule}><Glyphicon glyph="plus"/> Ajouter</Button>
 						{modules}
 					</Col>
@@ -60,7 +77,7 @@ class ProjectChargeCalculatorApp extends Component {
 		const name  = evt.target.value;
 		// on mets a jours l'etat
 		this.setState((prev)=>{
-			prev.project = name;
+			prev.project.label = name;
 
 			return prev;
 		});
@@ -74,7 +91,7 @@ class ProjectChargeCalculatorApp extends Component {
 		const uuid= "mod_" + ProjectChargeCalculatorUtils.uuid();
 		// ajout du module
 		this.setState((prev) => {
-			prev.modules.push({id:uuid,label:'',functions:[]});
+			prev.project.modules.push({id:uuid,label:'',functions:[]});
 
 			return prev;
 		});
@@ -85,7 +102,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	setModuleLabel(uuid,label){
 		this.setState((prev)=> {
-			prev.modules = prev.modules.map((module)=>{
+			prev.project.modules = prev.project.modules.map((module)=>{
 				// pour le bon module on mets a jours le label
 				if(module.id===uuid){
 					module.label = label
@@ -103,7 +120,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	removeModule(uuid){
 		this.setState((prev)=>{
-			prev.modules = prev.modules.filter((el) => el.id !== uuid);
+			prev.project.modules = prev.project.modules.filter((el) => el.id !== uuid);
 
 			return prev;
 		});
@@ -116,7 +133,7 @@ class ProjectChargeCalculatorApp extends Component {
 		// on charge un uuid
 		const uuid= "fct_" + ProjectChargeCalculatorUtils.uuid();
 		this.setState((prev) => {
-			prev.modules = prev.modules.map((module)=>{
+			prev.project.modules = prev.project.modules.map((module)=>{
 				// pour le bon module
 				if(module.id===mod){
 					// on ajoute une fonctionnalite
@@ -139,7 +156,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	removeFunction(mod,fct){
 		this.setState((prev)=>{
-				prev.modules = prev.modules.map((module)=>{
+				prev.project.modules = prev.project.modules.map((module)=>{
 					// pour le bon module, on supprime la fonctionnalite
 					if(module.id===mod){
 						module.functions = module.functions.filter((el)=>el.id!==fct);
@@ -157,7 +174,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	setFunctionLabel(mod,func,label){
 		this.setState((prev) => {
-			prev.modules = prev.modules.map((module)=>{
+			prev.project.modules = prev.project.modules.map((module)=>{
 				// Pour le bon module
 				if(module.id===mod){
 					module.functions.map((fct)=>{
@@ -180,7 +197,7 @@ class ProjectChargeCalculatorApp extends Component {
 	 */
 	setFunctionCost(mod,func,ihm,traitement){
 		this.setState((prev) => {
-			prev.modules = prev.modules.map((module)=>{
+			prev.project.modules = prev.project.modules.map((module)=>{
 				// pour le bon module
 				if(module.id===mod){
 					module.functions.map((fct)=>{
@@ -204,9 +221,61 @@ class ProjectChargeCalculatorApp extends Component {
 	*/
 	saveAsJson(){
 		// création du fichier
-		var file = new File([JSON.stringify(this.state)], this.state.project+".json", {type: "text/plain;charset=utf-8"});
+		var file = new File([JSON.stringify(this.state.project)], this.state.project.label+".json", {type: "text/plain;charset=utf-8"});
 		// sauvegarde pour l'user
 		FileSaver.saveAs(file);
+	}
+
+	loadJson(evt){
+		var _this=  this;
+		evt.preventDefault();
+		console.log("drop");
+		console.log(evt);
+		var reader = new FileReader();
+		reader.addEventListener("load",function(){
+			_this.JsonLoaded(reader.result);
+		})
+
+
+    	try {
+			reader.readAsText(evt.dataTransfer.files[0]);
+
+    	} catch (e) {
+      		// If the text data isn't parsable we'll just ignore it.
+			console.log("error parsing");
+      		return;
+    	}
+
+		this.setState({isDragging : false});
+
+	}
+
+	JsonLoaded(data){
+		this.setState({project : JSON.parse(data)});
+	}
+
+	dragOver(evt){
+		evt.preventDefault();
+	}
+
+	dragEnter(evt){
+		evt.preventDefault();
+		this.setState((prev)=>{
+			prev.isDragging = true;
+			prev.counterDrag += 1;
+			return prev;
+		});
+		return false;
+	}
+
+	dragLeave(evt){
+		evt.preventDefault();
+		this.setState((prev)=>{
+			prev.counterDrag -= 1;
+			prev.isDragging = (prev.counterDrag !== 0);
+			return prev;
+		});
+		return false;
 	}
 }
 
