@@ -21,7 +21,8 @@ class ProjectChargeCalculatorModule extends Component {
 			function={func}
 			onSetLabel={this.props.onSetFunctionLabel}
 			onRemove={this.props.onRemoveFunction}
-			onSetCost={this.props.onSetFunctionCost} />);
+			onSetCost={this.props.onSetFunctionCost}
+			param={this.props.param} />);
 		return <Panel>
 			<Grid>
 				<Row>
@@ -29,7 +30,7 @@ class ProjectChargeCalculatorModule extends Component {
 							<input type="text" value={this.props.module.label} onChange={this.handleSetLabel}/>
 					</Col>
 					<Col xs={2}>
-						{ProjectChargeCalculatorUtils.getModuleCost(this.props.module)} JEH
+						{ProjectChargeCalculatorUtils.getModuleCost(this.props.module,this.props.param.costCoef)} JEH
 					</Col>
 					<Col xs={1}>
 						<Button onClick={this.handleAddFunction} bsStyle="primary"><Glyphicon glyph="plus"/></Button>

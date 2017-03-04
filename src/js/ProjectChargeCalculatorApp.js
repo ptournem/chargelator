@@ -14,7 +14,17 @@ class ProjectChargeCalculatorApp extends Component {
 				modules : []
 			},
 			isDragging : false,
-			counterDrag : 0
+			counterDrag : 0,
+			param : {
+				costCoef : {
+					ihm : [
+						0.5, 1, 2, 4
+					],
+					traitement : [
+						0.25, 0.5, 1, 2
+					]
+				}
+			}
 		};
 
 		this.setProjectName = this.setProjectName.bind(this);
@@ -45,7 +55,8 @@ class ProjectChargeCalculatorApp extends Component {
 			onAddFunction={this.addFunction}
 			onRemoveFunction={this.removeFunction}
 			onSetFunctionLabel={this.setFunctionLabel}
-			onSetFunctionCost={this.setFunctionCost} />);
+			onSetFunctionCost={this.setFunctionCost}
+			param={this.state.param} />);
 
 		const droppingAlert = this.state.isDragging=== true ? this.renderDroppingZone() : '';
 		return	(
@@ -61,7 +72,7 @@ class ProjectChargeCalculatorApp extends Component {
 				</Row>
 				<Row>
 					<Col xs={12}>
-						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.project.modules)}</b> JEH</Well>
+						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.project.modules,this.state.param.costCoef)}</b> JEH</Well>
 						<Button onClick={this.addModule}><Glyphicon glyph="plus"/> Ajouter</Button>
 						{modules}
 					</Col>
