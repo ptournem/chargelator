@@ -12,8 +12,9 @@
 * Display functionnality total costs
 * Display module total costs
 * Display project total costs
+* Import/export from/to JSON file
 
 # To develop
-* import/export from file
-* modify IHM and Process cost coefficient
-* design
+* Modify IHM and Process cost coefficient
+* Design
+* Global project cost
