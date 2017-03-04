@@ -30,16 +30,32 @@ class ProjectChargeCalculatorUtils{
 	 */
 	static getFunctionCost(fct,param){
 		return (
-			param.ihm[0] * fct.ihm[0] +
-			param.ihm[1] * fct.ihm[1] +
-			param.ihm[2] * fct.ihm[2] +
-			param.ihm[3] * fct.ihm[3] +
-			param.traitement[0] * fct.traitement[0] +
-			param.traitement[1] * fct.traitement[1] +
-			param.traitement[2] * fct.traitement[2] +
-			param.traitement[3] * fct.traitement[3]
+			ProjectChargeCalculatorUtils.parseCoef(param.ihm[0]) * fct.ihm[0] +
+			ProjectChargeCalculatorUtils.parseCoef(param.ihm[1]) * fct.ihm[1] +
+			ProjectChargeCalculatorUtils.parseCoef(param.ihm[2]) * fct.ihm[2] +
+			ProjectChargeCalculatorUtils.parseCoef(param.ihm[3]) * fct.ihm[3] +
+			ProjectChargeCalculatorUtils.parseCoef(param.traitement[0]) * fct.traitement[0] +
+			ProjectChargeCalculatorUtils.parseCoef(param.traitement[1]) * fct.traitement[1] +
+			ProjectChargeCalculatorUtils.parseCoef(param.traitement[2]) * fct.traitement[2] +
+			ProjectChargeCalculatorUtils.parseCoef(param.traitement[3]) * fct.traitement[3]
 		);
 	}
+
+	/**
+	 * Parse les coefs
+	 */
+	static parseCoef(coef){
+		// parse le float
+		let parsed  = parseFloat(coef);
+		// verifie que c'est un number
+		if(isNaN(parsed)){
+			return 0;
+		}
+
+		// renvoie la valeur parsé
+		return parsed;
+	}
+
 
 	/**
 	 * Calcule les couts d'un module

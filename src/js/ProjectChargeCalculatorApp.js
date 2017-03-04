@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import{ Button, Glyphicon , Well, Row, Col, Alert} from 'react-bootstrap';
 import ProjectChargeCalculatorModule from './ProjectChargeCalculatorModule.js';
 import ProjectChargeCalculatorUtils from './ProjectChargeCalculatorUtils.js';
+import ProjectChargeCalculatorParamCoef from './ProjectChargeCalculatorParamCoef.js';
 import FileSaver from 'file-saver';
 
 class ProjectChargeCalculatorApp extends Component {
@@ -11,20 +12,21 @@ class ProjectChargeCalculatorApp extends Component {
 		this.state = {
 			project : {
 				label : 'Nouveau Projet',
-				modules : []
+				modules : [],
+				param : {
+					costCoef : {
+						ihm : [
+							0.5, 1, 2, 4
+						],
+						traitement : [
+							0.25, 0.5, 1, 2
+						]
+					}
+				}
 			},
 			isDragging : false,
 			counterDrag : 0,
-			param : {
-				costCoef : {
-					ihm : [
-						0.5, 1, 2, 4
-					],
-					traitement : [
-						0.25, 0.5, 1, 2
-					]
-				}
-			}
+			showParam : false
 		};
 
 		this.setProjectName = this.setProjectName.bind(this);
@@ -40,6 +42,8 @@ class ProjectChargeCalculatorApp extends Component {
 		this.dragOver = this.dragOver.bind(this);
 		this.dragEnter = this.dragEnter.bind(this);
 		this.dragLeave = this.dragLeave.bind(this);
+		this.setParamCost = this.setParamCost.bind(this);
+		this.toggleParam = this.toggleParam.bind(this);
 	}
 
 	renderDroppingZone(){
@@ -56,7 +60,8 @@ class ProjectChargeCalculatorApp extends Component {
 			onRemoveFunction={this.removeFunction}
 			onSetFunctionLabel={this.setFunctionLabel}
 			onSetFunctionCost={this.setFunctionCost}
-			param={this.state.param} />);
+			param={this.state.project.param} />);
+		const param = this.state.showParam ? <ProjectChargeCalculatorParamCoef param={this.state.project.param} onChangeCost={this.setParamCost} /> : "";
 
 		const droppingAlert = this.state.isDragging=== true ? this.renderDroppingZone() : '';
 		return	(
@@ -67,12 +72,14 @@ class ProjectChargeCalculatorApp extends Component {
 						<h1><input type="text" value={this.state.project.label} onChange={this.setProjectName} /></h1>
 					</Col>
 					<Col xs={2}>
+						<Button onClick={this.toggleParam} className="pull-right"><Glyphicon glyph="wrench"></Glyphicon></Button>
 						<Button onClick={this.saveAsJson}  className="pull-right"><Glyphicon glyph="save"></Glyphicon></Button>
 					</Col>
 				</Row>
+				{param}
 				<Row>
 					<Col xs={12}>
-						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.project.modules,this.state.param.costCoef)}</b> JEH</Well>
+						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.project.modules,this.state.project.param.costCoef)}</b> JEH</Well>
 						<Button onClick={this.addModule}><Glyphicon glyph="plus"/> Ajouter</Button>
 						{modules}
 					</Col>
@@ -232,7 +239,9 @@ class ProjectChargeCalculatorApp extends Component {
 	*/
 	saveAsJson(){
 		// création du fichier
-		var file = new File([JSON.stringify(this.state.project)], this.state.project.label+".json", {type: "text/plain;charset=utf-8"});
+		var file = new File([JSON.stringify(this.state.project)],
+		 	this.state.project.label+".json",
+			{type: "text/plain;charset=utf-8"});
 		// sauvegarde pour l'user
 		FileSaver.saveAs(file);
 	}
@@ -261,14 +270,23 @@ class ProjectChargeCalculatorApp extends Component {
 
 	}
 
+	/**
+	 *
+	 */
 	JsonLoaded(data){
 		this.setState({project : JSON.parse(data)});
 	}
 
+	/**
+	 * indique que le drag est over
+	 */
 	dragOver(evt){
 		evt.preventDefault();
 	}
 
+	/**
+	 * Indique qu'on rentre en drag dans la zone
+	 */
 	dragEnter(evt){
 		evt.preventDefault();
 		this.setState((prev)=>{
@@ -279,6 +297,9 @@ class ProjectChargeCalculatorApp extends Component {
 		return false;
 	}
 
+	/**
+	 * Reinitialise a la sortie de la zone
+	 */
 	dragLeave(evt){
 		evt.preventDefault();
 		this.setState((prev)=>{
@@ -287,6 +308,27 @@ class ProjectChargeCalculatorApp extends Component {
 			return prev;
 		});
 		return false;
+	}
+
+	/**
+	 * Mets à jours les costs dans le parametrage du project
+	 */
+	setParamCost(costs){
+		this.setState((prev)=>{
+			prev.project.param.costCoef = costs;
+
+			return prev;
+		});
+	}
+
+	/**
+	 * Toggle le show param
+	 */
+	toggleParam(){
+		this.setState((prev)=>{
+			prev.showParam = !prev.showParam;
+			return prev;
+		})
 	}
 }
 
