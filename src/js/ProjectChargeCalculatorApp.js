@@ -44,6 +44,7 @@ class ProjectChargeCalculatorApp extends Component {
 		this.dragLeave = this.dragLeave.bind(this);
 		this.setParamCost = this.setParamCost.bind(this);
 		this.toggleParam = this.toggleParam.bind(this);
+		this.reset= this.reset.bind(this);
 	}
 
 	renderDroppingZone(){
@@ -74,6 +75,7 @@ class ProjectChargeCalculatorApp extends Component {
 					<Col xs={2}>
 						<Button onClick={this.toggleParam} className="pull-right"><Glyphicon glyph="wrench"></Glyphicon></Button>
 						<Button onClick={this.saveAsJson}  className="pull-right"><Glyphicon glyph="save"></Glyphicon></Button>
+						<Button onClick={this.reset} className="pull-right"><Glyphicon glyph="new-window"></Glyphicon></Button>
 					</Col>
 				</Row>
 				{param}
@@ -131,6 +133,13 @@ class ProjectChargeCalculatorApp extends Component {
 			return prev;
 
 		})
+	}
+
+	reset(){
+		this.setState((prev)=>{
+			prev.project.label = "Nouveau Projet";
+			prev.project.modules = [];
+		});
 	}
 
 	/**
