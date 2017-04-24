@@ -78,15 +78,21 @@ class ProjectChargeCalculatorApp extends Component {
 						<Button onClick={this.reset} className="pull-right"><Glyphicon glyph="new-window"></Glyphicon></Button>
 					</Col>
 				</Row>
-				{param}
 				<Row>
-					<Col xs={12}>
-						<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.project.modules,this.state.project.param.costCoef)}</b> JEH</Well>
-						<Button onClick={this.addModule}><Glyphicon glyph="plus"/> Ajouter</Button>
-						{modules}
+					<Col xs={this.state.showParam ? 9 : 12}>
+						<Row>
+							<Col xs={12}>
+								<Well> Cout du projet : <b>{ProjectChargeCalculatorUtils.getProjectCost(this.state.project.modules,this.state.project.param.costCoef)}</b> JEH</Well>
+								<Button onClick={this.addModule}><Glyphicon glyph="plus"/> Ajouter</Button>
+								{modules}
+							</Col>
+						</Row>
+
 					</Col>
+					{param}
 				</Row>
 			</div>
+
 		);
 	}
 	/**

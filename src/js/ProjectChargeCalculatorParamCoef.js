@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import{Row, Col,Table, Panel} from 'react-bootstrap';
+import{Col,Table, Panel} from 'react-bootstrap';
 
 class ProjectChargeCalculatorParamCoef extends Component {
   constructor(props){
@@ -9,42 +9,94 @@ class ProjectChargeCalculatorParamCoef extends Component {
   }
 
   render(){
-    return <Row>
-      <Col xs={12}>
-        <Panel title="Parametrage">
+    return <Col xs={3}>
+        <Panel title="Parametrage IHM">
           <Table fill responsive striped bordered>
             <thead>
               <tr>
-                <th colSpan={4}>IHM</th>
-                <th colSpan={4}>Traitement</th>
-              </tr>
-              <tr>
-                <th>Faible</th>
-                <th>Simple</th>
-                <th>Moyenne</th>
-                <th>Complexe</th>
-                <th>Faible</th>
-                <th>Simple</th>
-                <th>Moyenne</th>
-                <th>Complexe</th>
+                <th colSpan={2}>IHM</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th><input type="text" value={this.props.param.costCoef.ihm[0]} onChange={(evt)=>this.handleChangeCost(evt,true,0)}/></th>
-                <th><input type="text" value={this.props.param.costCoef.ihm[1]} onChange={(evt)=>this.handleChangeCost(evt,true,1)}/></th>
-                <th><input type="text" value={this.props.param.costCoef.ihm[2]} onChange={(evt)=>this.handleChangeCost(evt,true,2)}/></th>
-                <th><input type="text" value={this.props.param.costCoef.ihm[3]} onChange={(evt)=>this.handleChangeCost(evt,true,3)}/></th>
-                <th><input type="text" value={this.props.param.costCoef.traitement[0]} onChange={(evt)=>this.handleChangeCost(evt,false,0)}/></th>
-                <th><input type="text" value={this.props.param.costCoef.traitement[1]} onChange={(evt)=>this.handleChangeCost(evt,false,1)}/></th>
-                <th><input type="text" value={this.props.param.costCoef.traitement[2]} onChange={(evt)=>this.handleChangeCost(evt,false,2)}/></th>
-                <th><input type="text" value={this.props.param.costCoef.traitement[3]} onChange={(evt)=>this.handleChangeCost(evt,false,3)}/></th>
+                <td>
+                  Faible
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.ihm[0]} onChange={(evt)=>this.handleChangeCost(evt,true,0)}/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Simple
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.ihm[1]} onChange={(evt)=>this.handleChangeCost(evt,true,1)}/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Moyen
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.ihm[2]} onChange={(evt)=>this.handleChangeCost(evt,true,2)}/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Complexe
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.ihm[3]} onChange={(evt)=>this.handleChangeCost(evt,true,3)}/>
+                </td>
               </tr>
             </tbody>
           </Table>
         </Panel>
-      </Col>
-     </Row>;
+        <Panel title="Parametrage traitement">
+          <Table fill responsive striped bordered>
+            <thead>
+              <tr>
+                <th colSpan={2}>Traitement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Faible
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.traitement[0]} onChange={(evt)=>this.handleChangeCost(evt,false,0)}/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Simple
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.traitement[1]} onChange={(evt)=>this.handleChangeCost(evt,false,1)}/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Moyen
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.traitement[2]} onChange={(evt)=>this.handleChangeCost(evt,false,2)}/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Complexe
+                </td>
+                <td>
+                  <input type="text" value={this.props.param.costCoef.traitement[3]} onChange={(evt)=>this.handleChangeCost(evt,false,3)}/>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </Panel>
+      </Col>;
   }
 
   handleChangeCost(evt,isIhm,index){
