@@ -23,7 +23,7 @@ class ProjectChargeCalculatorModule extends Component {
 			onRemove={this.props.onRemoveFunction}
 			onSetCost={this.props.onSetFunctionCost}
 			param={this.props.param} />);
-		return <Panel>
+		return <Panel className="projectChargeCalculatorModule">
 			<Grid>
 				<Row>
 					<Col xs={8}>
