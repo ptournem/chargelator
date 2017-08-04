@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ProjectChargeCalculatorApp from './js/ProjectChargeCalculatorApp.js';
+import ProjectChargeCalculatorApp from './containers/App.js';
 import { Grid, Navbar, Row, Col } from 'react-bootstrap';
 
 class App extends Component {
