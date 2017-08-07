@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {setModuleName,removeModule, addFunction} from '../actions';
+import {setModuleName,removeModule, addFunction, toggleShowModule} from '../actions';
 import Utils from '../Utils/Utils';
 import ModuleComponent from '../components/Module';
 
@@ -26,7 +26,11 @@ const mapDispatchToProps = (dispatch,{id}) => {
 		},
 		onAddFunction : () => {
 			dispatch(addFunction(id));
+		},
+		onToggleShowModule: () => {
+			dispatch(toggleShowModule(id));
 		}
+
 	};
 };
 

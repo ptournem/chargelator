@@ -1,4 +1,4 @@
-import  {ADD_MODULE, SET_MODULE_NAME, REMOVE_MODULE, ADD_FUNCTION, REMOVE_FUNCTION, RESET_PROJECT, LOAD_JSON} from '../actions';
+import  {ADD_MODULE, SET_MODULE_NAME, REMOVE_MODULE, ADD_FUNCTION, REMOVE_FUNCTION, RESET_PROJECT, LOAD_JSON, TOGGLE_SHOW_MODULE} from '../actions';
 import {combineReducers} from 'redux';
 import {List, Map, fromJS} from 'immutable';
 
@@ -11,7 +11,7 @@ function addEntry(state,action){
 	const {payLoad} = action ;
 	const {id} = payLoad;
 
-	const module =  {id : id, name : "", fncs : []};
+	const module =  {id : id, name : "",isShown : true, fncs : []};
 
 	return state.set(id,fromJS(module));
 }
@@ -99,6 +99,13 @@ function loadJsonId(state,action){
 	return fromJS(modules.allIds);
 }
 
+function toggleShowModule(state,action){
+	const{payLoad} = action;
+	const{id} = payLoad;
+
+	return state.update(id,module => module.update("isShown", p=> !p));
+}
+
 
 /**
  * [modulesById Handle action for byId object]
@@ -118,6 +125,7 @@ function modulesById(state = null,action){
 		case REMOVE_FUNCTION : return removeFunction(state,action);
 		case RESET_PROJECT : return resetEntry(state,action);
 		case LOAD_JSON : return loadJsonEntry(state,action);
+		case TOGGLE_SHOW_MODULE : return toggleShowModule(state,action);
 		default: return state;
 
 	}

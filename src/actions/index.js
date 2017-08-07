@@ -16,6 +16,7 @@ export const LOAD_JSON = 'LOAD_JSON';
 export const ADD_MODULE = 'ADD_MODULE';
 export const SET_MODULE_NAME = 'SET_MODULE_NAME';
 export const REMOVE_MODULE = 'REMOVE_MODULE';
+export const TOGGLE_SHOW_MODULE = 'TOGGLE_SHOW_MODULE';
 
 // Function
 export const ADD_FUNCTION = 'ADD_FUNCTION';
@@ -190,5 +191,16 @@ export const setIsDragging = (isDragging) => {
 export const loadJson = (data) => {
     return actionCreator(LOAD_JSON, {
 		data: data
+	});
+};
+
+/**
+ * [toggleShowModule action creator to toggle a module shown param ]
+ * @return {Object}    [Action]
+ * @param  {String} id [Module id]
+ */
+export const toggleShowModule = (id) => {
+    return actionCreator(TOGGLE_SHOW_MODULE, {
+		id : id
 	});
 };
