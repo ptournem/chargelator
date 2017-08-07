@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {setProjectLabel,addModule,resetProject,toggleShowParam,setIsDragging,loadJson} from '../actions';
+import {setProjectLabel,addModule,resetProject,toggleShowParam,setIsDragging,loadJson,setCurrentTab} from '../actions';
 import AppComponent from '../components/App';
 import Utils from '../Utils/Utils';
 import FileSaver from 'file-saver';
@@ -44,6 +44,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		onLoadJson : data => {
 			dispatch(loadJson(data));
+		},
+		onSetCurrentTab : id => {
+			dispatch(setCurrentTab(id));
 		}
 	};
 };

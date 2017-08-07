@@ -1,4 +1,4 @@
-import  {SET_PROJECT_LABEL, RESET_PROJECT, SET_PROJECT_COSTS, TOGGLE_SHOW_PARAM, SET_IS_DRAGGING, LOAD_JSON} from '../actions';
+import  {SET_PROJECT_LABEL, RESET_PROJECT, SET_PROJECT_COSTS, TOGGLE_SHOW_PARAM, SET_IS_DRAGGING, LOAD_JSON, SET_CURRENT_TAB} from '../actions';
 import {fromJS} from 'immutable';
 
 const defaultCosts=  {
@@ -48,6 +48,13 @@ function loadJson(state,action){
 	return fromJS(projects);
 }
 
+function setCurrentTab(state,action){
+	const{payLoad} = action;
+	const{id} = payLoad;
+
+	return state.update('currentTab', p => id)
+}
+
 
 const  projectReducer = (state = null,action) => {
 	if(state === null){
@@ -56,6 +63,7 @@ const  projectReducer = (state = null,action) => {
 			costs : defaultCosts,
 			isParamShown : false,
 			isDragging : false,
+			currentTab : 1
 		});
 	}
 
@@ -66,6 +74,7 @@ const  projectReducer = (state = null,action) => {
 		case TOGGLE_SHOW_PARAM : return toggleShowParam(state,action);
 		case SET_IS_DRAGGING : return setIsDragging(state,action);
 		case LOAD_JSON : return loadJson(state,action);
+		case SET_CURRENT_TAB : return setCurrentTab(state,action);
 		default: return state;
 
 	}

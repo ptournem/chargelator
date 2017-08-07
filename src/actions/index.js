@@ -11,6 +11,7 @@ export const SET_PROJECT_COSTS = 'SET_PROJECT_COSTS';
 export const TOGGLE_SHOW_PARAM = 'TOGGLE_SHOW_PARAM';
 export const SET_IS_DRAGGING = 'SET_IS_DRAGGING';
 export const LOAD_JSON = 'LOAD_JSON';
+export const SET_CURRENT_TAB = 'SET_CURRENT_TAB';
 
 // Modules
 export const ADD_MODULE = 'ADD_MODULE';
@@ -201,6 +202,17 @@ export const loadJson = (data) => {
  */
 export const toggleShowModule = (id) => {
     return actionCreator(TOGGLE_SHOW_MODULE, {
+		id : id
+	});
+};
+
+/**
+ * [setCurrentTab action creator to set current tab ]
+ * @return {Object}    [Action]
+ * @param  {String} id [tab id]
+ */
+export const setCurrentTab = (id) => {
+    return actionCreator(SET_CURRENT_TAB, {
 		id : id
 	});
 };
