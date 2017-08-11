@@ -13,8 +13,10 @@
 * Display module total costs
 * Display project total costs
 * Import/export from/to JSON file
+* Modify IHM and Process cost coefficient
+* Global project cost
 
 # To develop
-* Modify IHM and Process cost coefficient
 * Design
-* Global project cost
+* Save in mongoDb
+* share Unique URL

@@ -1,4 +1,4 @@
-import  {SET_PROJECT_LABEL, RESET_PROJECT, SET_PROJECT_COSTS, TOGGLE_SHOW_PARAM, SET_IS_DRAGGING, LOAD_JSON, SET_CURRENT_TAB, SET_CONNEXE_COST} from '../actions';
+import  {SET_PROJECT_LABEL, RESET_PROJECT, SET_PROJECT_COSTS, TOGGLE_SHOW_PARAM, SET_IS_DRAGGING, LOAD_JSON, SET_CURRENT_TAB, SET_CONNEXE_COST,SET_PROJECT_PARAM} from '../actions';
 import {fromJS} from 'immutable';
 
 const defaultCosts=  {
@@ -61,6 +61,13 @@ function setConnexeCost(state,action){
 	return state.update('connexeCosts', c => c.set(label,cost));
 }
 
+function setProjectParam(state,action){
+	const{payLoad} = action;
+	const{key,value} = payLoad;
+
+	return state.update('parameters', p => p.set(key,value));
+}
+
 function getDefaultState(){
 	return 	fromJS({
 			label : defaultLabel,
@@ -68,7 +75,11 @@ function getDefaultState(){
 			isParamShown : false,
 			isDragging : false,
 			currentTab : 1,
-			connexeCosts : {}
+			connexeCosts : {},
+			parameters : {
+				delay : 0,
+				complexite :0
+			}
 		});
 }
 
@@ -87,6 +98,7 @@ const  projectReducer = (state = null,action) => {
 		case LOAD_JSON : return loadJson(state,action);
 		case SET_CURRENT_TAB : return setCurrentTab(state,action);
 		case SET_CONNEXE_COST : return setConnexeCost(state,action);
+		case SET_PROJECT_PARAM : return setProjectParam(state,action);
 		default: return state;
 
 	}

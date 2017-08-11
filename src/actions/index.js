@@ -13,6 +13,7 @@ export const SET_IS_DRAGGING = 'SET_IS_DRAGGING';
 export const LOAD_JSON = 'LOAD_JSON';
 export const SET_CURRENT_TAB = 'SET_CURRENT_TAB';
 export const SET_CONNEXE_COST = 'SET_CONNEXE_COST';
+export const SET_PROJECT_PARAM = 'SET_PROJECT_PARAM';
 
 // Modules
 export const ADD_MODULE = 'ADD_MODULE';
@@ -230,3 +231,17 @@ export const setConnexeCost = (label, cost) => {
 		cost : cost
 	});
 };
+
+
+/**
+ * [setProjectParam action creator to set a project parameter ]
+ * @return {Object}    [Action]
+ * @param  {String} key [parameter key]
+ * @param  {Float} value [parameter value]
+ */
+export const setProjectParam = (key,value) => {
+	return actionCreator(SET_PROJECT_PARAM, {
+			key,
+			value
+	});
+}

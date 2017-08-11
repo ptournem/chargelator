@@ -1,13 +1,15 @@
 import {connect} from 'react-redux';
 import GlobalComponent from '../components/Global';
-import {setConnexeCost} from '../actions';
+import {setConnexeCost, setProjectParam} from '../actions';
 import Utils from '../Utils/Utils';
 
 const mapStateToProps = (state,{id}) => {
 	const costs = state.functions.byId.map(fnc => fnc.get('costs')).toList().toJS();
 	const param = state.projects.get('costs').toJS();
 	const cost = Utils.getFunctionsCost(costs,param)
-	const connexeCosts = state.projects.get('connexeCosts');
+	const project = state.projects;
+	const connexeCosts = project.get('connexeCosts');
+
 
 	let total =  0;
 	const workflow = [
@@ -35,11 +37,38 @@ const mapStateToProps = (state,{id}) => {
 		return item;
 	})
 
+	const nbMonth = total / 20;
+	const nbWeek = Math.ceil(nbMonth *4.3);
+	const minMonth = Utils.ceilDecimal(2.5*Math.pow(nbMonth,1/3),1);
+	const minWeek = Math.ceil(minMonth*4.3);
+	const optMonth = Utils.ceilDecimal(1.4 * minMonth,1) ;
+	const optWeek = Math.ceil(optMonth  * 4.3);
+
+	const delay = project.get('parameters').get('delay') - minWeek;
+	const complexite = project.get('parameters').get('complexite');
+	const margeSecu = delay < 0 ? -delay : 0;
+
+	const margeSecuDay = Math.ceil(total*margeSecu/100);
+	const margeComplexDay = Math.ceil(total*complexite/100);
+
+	const totalAfterMarge = total + margeSecuDay + margeComplexDay;
+
 	return {
-		cost : cost,
-		workflow : workflow,
-		total : total,
-		connexeCosts : connexeCosts
+		cost,
+		workflow,
+		total,
+		connexeCosts,
+		nbMonth,
+		nbWeek,
+		minMonth,
+		minWeek,
+		optMonth,
+		optWeek,
+		project,
+		margeSecu,
+		margeSecuDay,
+		margeComplexDay ,
+		totalAfterMarge
 	};
 };
 
@@ -47,6 +76,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onSetConnexeCost : (label,cost) => {
 			dispatch(setConnexeCost(label,cost));
+		},
+		onSetProjectParam : (key,value) => {
+			dispatch(setProjectParam(key,value));
 		}
 	};
 };

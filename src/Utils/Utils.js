@@ -103,6 +103,14 @@ class Utils{
 		});
 		return ret;
 	}
+
+	/**
+	 * ceil with decimal
+	 */
+	static ceilDecimal(value,decimal){
+		const factor = Math.pow(10,decimal);
+		return Math.ceil(value * factor) / factor;
+	}
 }
 
 export default Utils;

@@ -3,7 +3,7 @@ const GlobalLine = ({label,charge,cost,percentage,type,editable,sum,connexeCosts
 	let value = '';
 	if(editable){
 		value = <input value={connexeCosts.has(label)?connexeCosts.get(label):0} onChange={(evt) => {
-				let v = parseInt(evt.target.value);
+				let v = parseInt(evt.target.value,10);
 				if(!v){
 					v = 0;
 				}
@@ -15,8 +15,8 @@ const GlobalLine = ({label,charge,cost,percentage,type,editable,sum,connexeCosts
 
 	return (
 		<tr className={type}>
-			<td>{type!=='sumup'?label:''}</td>
-			<td>{type==='sumup'?charge:''}</td>
+			<th>{type!=='sumup'?label:''}</th>
+			<th>{type==='sumup'?charge:''}</th>
 			<td>{sum}</td>
 
 			<td>{editable || type === 'sumup'?'':(percentage+ ' %')}</td>
