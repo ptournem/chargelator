@@ -83,6 +83,26 @@ class Utils{
 			);
 		});
 	}
+
+
+	/**
+	 * Calcule les couts d'une section en fonction du coup de réalisation et
+	 * des pourcentages des items de la section
+	 */
+	static getSectionCost(inner, cost,connexeCosts){
+		let ret = 0;
+
+		inner.forEach((item)=> {
+			if(item.editable ){
+				if(connexeCosts.has(item.label)){
+					ret+= connexeCosts.get(item.label);
+				}
+			} else {
+				ret+= Math.ceil((cost/47)*item.percentage);
+			}
+		});
+		return ret;
+	}
 }
 
 export default Utils;

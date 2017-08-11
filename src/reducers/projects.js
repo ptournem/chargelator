@@ -1,4 +1,4 @@
-import  {SET_PROJECT_LABEL, RESET_PROJECT, SET_PROJECT_COSTS, TOGGLE_SHOW_PARAM, SET_IS_DRAGGING, LOAD_JSON, SET_CURRENT_TAB} from '../actions';
+import  {SET_PROJECT_LABEL, RESET_PROJECT, SET_PROJECT_COSTS, TOGGLE_SHOW_PARAM, SET_IS_DRAGGING, LOAD_JSON, SET_CURRENT_TAB, SET_CONNEXE_COST} from '../actions';
 import {fromJS} from 'immutable';
 
 const defaultCosts=  {
@@ -26,8 +26,7 @@ function setProjectCosts(state,action){
 }
 
 function resetProject(state,action){
-	state = state.update('label', () => defaultLabel);
-	return state.update('costs', () =>  fromJS(defaultCosts));
+	return getDefaultState();
 }
 
 function toggleShowParam(state,action){
@@ -49,22 +48,34 @@ function loadJson(state,action){
 }
 
 function setCurrentTab(state,action){
+
 	const{payLoad} = action;
 	const{id} = payLoad;
-
 	return state.update('currentTab', p => id)
+}
+
+function setConnexeCost(state,action){
+	const{payLoad} = action;
+	const{label,cost} = payLoad;
+
+	return state.update('connexeCosts', c => c.set(label,cost));
+}
+
+function getDefaultState(){
+	return 	fromJS({
+			label : defaultLabel,
+			costs : defaultCosts,
+			isParamShown : false,
+			isDragging : false,
+			currentTab : 1,
+			connexeCosts : {}
+		});
 }
 
 
 const  projectReducer = (state = null,action) => {
 	if(state === null){
-		state = fromJS({
-			label : defaultLabel,
-			costs : defaultCosts,
-			isParamShown : false,
-			isDragging : false,
-			currentTab : 1
-		});
+		state = getDefaultState();
 	}
 
 	switch (action.type) {
@@ -75,6 +86,7 @@ const  projectReducer = (state = null,action) => {
 		case SET_IS_DRAGGING : return setIsDragging(state,action);
 		case LOAD_JSON : return loadJson(state,action);
 		case SET_CURRENT_TAB : return setCurrentTab(state,action);
+		case SET_CONNEXE_COST : return setConnexeCost(state,action);
 		default: return state;
 
 	}

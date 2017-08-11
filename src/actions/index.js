@@ -12,6 +12,7 @@ export const TOGGLE_SHOW_PARAM = 'TOGGLE_SHOW_PARAM';
 export const SET_IS_DRAGGING = 'SET_IS_DRAGGING';
 export const LOAD_JSON = 'LOAD_JSON';
 export const SET_CURRENT_TAB = 'SET_CURRENT_TAB';
+export const SET_CONNEXE_COST = 'SET_CONNEXE_COST';
 
 // Modules
 export const ADD_MODULE = 'ADD_MODULE';
@@ -214,5 +215,18 @@ export const toggleShowModule = (id) => {
 export const setCurrentTab = (id) => {
     return actionCreator(SET_CURRENT_TAB, {
 		id : id
+	});
+};
+
+/**
+ * [setConnexeCost action creator to set a connexe cost ]
+ * @return {Object}    [Action]
+ * @param  {String} label [connexe label]
+ * @param  {Float} cost [connexe cost]
+ */
+export const setConnexeCost = (label, cost) => {
+    return actionCreator(SET_CONNEXE_COST, {
+		label : label,
+		cost : cost
 	});
 };

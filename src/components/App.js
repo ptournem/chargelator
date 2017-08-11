@@ -1,6 +1,7 @@
 import React from 'react';
 import{ Button, Glyphicon , Well, Row, Col, Alert, Nav, NavItem} from 'react-bootstrap';
 import Module from '../containers/Module.js';
+import Global from '../containers/Global.js';
 import ParamCoef from '../containers/ParamCoef.js';
 
 // hors de la constante pour quelle soit gardé en mémoire
@@ -83,7 +84,7 @@ const App = ({project,cost, modules, onAddModule, onSetProjectLabel, onSaveAsJso
 				</Row>
 			);
 		} else {
-			return '';
+			return <Global />;
 		}
 	}
 
@@ -106,7 +107,7 @@ const App = ({project,cost, modules, onAddModule, onSetProjectLabel, onSaveAsJso
 				<NavItem eventKey={2}>Charges globales</NavItem>
 			</Nav>
 			<br />
-			{renderTab(project.get('currentTab'))};
+			{renderTab(project.get('currentTab'))}
 
 		</div>
 
