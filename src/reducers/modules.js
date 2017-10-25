@@ -74,7 +74,13 @@ function removeFunction(state,action){
 	const {payLoad} = action;
 	const{id} = payLoad;
 
-	return state.map(m=> m.update("fncs", f => f.delete(f.indexOf(id))));
+	return state.map(m=> m.update("fncs", f => {
+		const index = f.indexOf(id);
+		if(index !== -1){
+			return f.delete(index);
+		}
+		return f;
+	}));
 }
 
 function resetEntry(state,action){
