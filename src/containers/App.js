@@ -6,14 +6,15 @@ import FileSaver from 'file-saver';
 
 const mapStateToProps = (state,{id}) => {
 	const modules = state.modules.allIds.map(id => state.modules.byId.get(id));
-	const costs = state.functions.byId.map(fnc => fnc.get('costs')).toList().toJS();
 	const project = state.projects;
 
-	const param = state.projects.get('costs').toJS();
+	const {cost :realCost,totalAfterMarge : globalCost} = Utils.getGlobalCost(state);
+
 	return {
 		modules : modules,
 		project : project,
-		cost : Utils.getFunctionsCost(costs,param),
+		cost : realCost,
+		globalCost : globalCost,
 		onSaveAsJson : () => {
 			// création du fichier
 			var file = new File([JSON.stringify(state)],

@@ -1,13 +1,14 @@
 import React from 'react';
-import{ Button, Glyphicon , Well, Row, Col, Alert, Nav, NavItem} from 'react-bootstrap';
+import{ Button, Glyphicon , Row, Col, Alert, Nav, NavItem} from 'react-bootstrap';
 import Module from '../containers/Module.js';
 import Global from '../containers/Global.js';
 import ParamCoef from '../containers/ParamCoef.js';
+import '../assets/css/grid-overview.css';
 
 // hors de la constante pour quelle soit gardé en mémoire
 let counter = 0;
 
-const App = ({project,cost, modules, onAddModule, onSetProjectLabel, onSaveAsJson, onReset, onToggleShowParam,setIsDragging,onLoadJson,onSetCurrentTab}) => {
+const App = ({project,cost,globalCost, modules, onAddModule, onSetProjectLabel, onSaveAsJson, onReset, onToggleShowParam,setIsDragging,onLoadJson,onSetCurrentTab}) => {
 	const mods = modules.map((module)=><Module key={module.get('id')} id={module.get('id')}/>);
 	const param =  project.get('isParamShown')?<ParamCoef />:"";
 
@@ -72,11 +73,10 @@ const App = ({project,cost, modules, onAddModule, onSetProjectLabel, onSaveAsJso
 				<Row>
 					<Col xs={project.get('isParamShown')?9:12}>
 						<Row>
-							<Col xs={12}>
-								<Well> Cout du projet : <b>{}</b>{cost} JEH</Well>
+
 								<Button onClick={onAddModule}><Glyphicon glyph="plus"/> Ajouter</Button>
 								{mods}
-							</Col>
+
 						</Row>
 
 					</Col>
@@ -101,6 +101,18 @@ const App = ({project,cost, modules, onAddModule, onSetProjectLabel, onSaveAsJso
 					<Button  className="pull-right" onClick={onSaveAsJson}><Glyphicon glyph="save"></Glyphicon></Button>
 					<Button  className="pull-right" onClick={onReset}><Glyphicon glyph="new-window"></Glyphicon></Button>
 				</Col>
+			</Row>
+			<Row>
+				<ul className="grid-overview grid-overview-2">
+					<li>
+						<span className='name'>Cout de réalisation</span>
+						<span className='value'>{cost} JEH</span>
+					</li>
+					<li>
+						<span className='name'>Cout global</span>
+						<span className='value'>{globalCost} JEH</span>
+					</li>
+				</ul>
 			</Row>
 			<Nav bsStyle="tabs" activeKey={project.get('currentTab')} justified onSelect={onSetCurrentTab}>
 				<NavItem eventKey={1}>Charges de réalisation</NavItem>
