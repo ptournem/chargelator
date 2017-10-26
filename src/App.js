@@ -11,7 +11,7 @@ class App extends Component {
           <Grid>
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="/">React Project Charge Calculator</a>
+                <a href="/">Chargelator</a>
               </Navbar.Brand>
             </Navbar.Header>
           </Grid>
