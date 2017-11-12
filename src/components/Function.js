@@ -10,9 +10,9 @@ const Function = ({fnc,cost, onSetFunctionLabel,onSetFunctionCosts, onRemoveFunc
 	};
 
 	return (
-		<tr>
+		<tr className="fctRow">
 			<td>#</td>
-			<td><input value={fnc.get('name')} type="text" onChange={(evt) => onSetFunctionLabel(evt.target.value)} /></td>
+			<td><input className="fctRowName" value={fnc.get('name')} type="text" onChange={(evt) => onSetFunctionLabel(evt.target.value)} /></td>
 			<td><input type="number" min={0} value={fnc.get('costs').get('ihm').get(0)} onChange={(evt)=>handleChangeCost(evt.target.value,true,0)}/></td>
 			<td><input type="number" min={0} value={fnc.get('costs').get('ihm').get(1)} onChange={(evt)=>handleChangeCost(evt.target.value,true,1)}/></td>
 			<td><input type="number" min={0} value={fnc.get('costs').get('ihm').get(2)} onChange={(evt)=>handleChangeCost(evt.target.value,true,2) }/></td>
@@ -21,7 +21,7 @@ const Function = ({fnc,cost, onSetFunctionLabel,onSetFunctionCosts, onRemoveFunc
 			<td><input type="number" min={0} value={fnc.get('costs').get('traitement').get(1)} onChange={(evt)=>handleChangeCost(evt.target.value,false,1)}/></td>
 			<td><input type="number" min={0} value={fnc.get('costs').get('traitement').get(2)} onChange={(evt)=>handleChangeCost(evt.target.value,false,2)}/></td>
 			<td><input type="number" min={0} value={fnc.get('costs').get('traitement').get(3)} onChange={(evt)=>handleChangeCost(evt.target.value,false,3)}/></td>
-			<td><b>{cost}</b></td>
+			<td className="fctRowCost"><b>{cost}</b></td>
 			<td><Button bsStyle="danger" onClick={()=>onRemoveFunction()}><Glyphicon glyph="trash" /></Button></td>
 		</tr>
 	);

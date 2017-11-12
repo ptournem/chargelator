@@ -5,4 +5,14 @@
 
 .projectChargeCalculatorModule input[type=text], .projectChargeCalculatorModule input[type=number]{
 	width : 100%;
+	text-align: center;
+}
+
+
+.projectChargeCalculatorModule .fctRow .fctRowName{
+	width : 300px;
+}
+
+.projectChargeCalculatorModule .fctRow .fctRowCost{
+	text-align: center;
 }
