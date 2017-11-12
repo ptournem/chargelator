@@ -97,9 +97,9 @@ const App = ({project,cost,globalCost, modules, onAddModule, onSetProjectLabel, 
 					<h1><input type="text" value={project.get('label')} onChange={evt =>{ onSetProjectLabel(evt.target.value)}} /></h1>
 				</Col>
 				<Col xs={2}>
-					<Button  className="pull-right" onClick={onToggleShowParam}><Glyphicon glyph="wrench"></Glyphicon></Button>
-					<Button  className="pull-right" onClick={onSaveAsJson}><Glyphicon glyph="save"></Glyphicon></Button>
-					<Button  className="pull-right" onClick={onReset}><Glyphicon glyph="new-window"></Glyphicon></Button>
+					<Button title="Show/hide parameters" className="pull-right" onClick={onToggleShowParam}><Glyphicon glyph="cog"></Glyphicon></Button>
+					<Button title="Save" className="pull-right" onClick={onSaveAsJson}><Glyphicon glyph="floppy-save"></Glyphicon></Button>
+					<Button title="Reset" className="pull-right" onClick={onReset}><Glyphicon glyph="repeat"></Glyphicon></Button>
 				</Col>
 			</Row>
 			<Row>
