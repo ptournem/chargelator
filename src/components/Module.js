@@ -14,21 +14,22 @@ const moduleDetail = (fonctions,isShown) => {
 			<thead>
 			  <tr>
 					<th rowSpan={2}>#</th>
-				<th rowSpan={2}>Fonctionnalité</th>
-				<th colSpan={4}>IHM</th>
-				<th colSpan={4}>Traitement</th>
-						<th rowSpan={2}><b>Cout</b></th>
-						<th rowSpan={2}></th>
+					<th rowSpan={2}>Fonctionnalité</th>
+					<th colSpan={4}>IHM</th>
+					<th colSpan={4}>Traitement</th>
+					<th rowSpan={2}><b>Cout</b></th>
+					<th rowSpan={2}></th>
 			  </tr>
 				<tr>
-				<th>Faible</th>
-						<th>Simple</th>
-						<th>Moyen</th>
-						<th>Complexe</th>
-						<th>Faible</th>
-						<th>Simple</th>
-						<th>Moyen</th>
-						<th>Complexe</th>
+						<th><span title="Faible">--</span></th>
+						<th><span title="Simple">-</span></th>
+						<th><span title="Moyen">+</span></th>
+						<th><span title="Complexe">++</span></th>
+						<th><span title="Faible">--</span></th>
+						<th><span title="Simple">-</span></th>
+						<th><span title="Moyen">+</span></th>
+						<th><span title="Complexe">++</span></th>
+
 			  </tr>
 			</thead>
 			<tbody>
