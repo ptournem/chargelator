@@ -29,15 +29,15 @@ class Utils{
 	 * Calcule le cout d'une fonctionnalite
 	 */
 	static getFunctionCost(fct,param){
-		return (
-			Utils.parseCoef(param.ihm[0]) * fct.ihm[0] +
-			Utils.parseCoef(param.ihm[1]) * fct.ihm[1] +
-			Utils.parseCoef(param.ihm[2]) * fct.ihm[2] +
-			Utils.parseCoef(param.ihm[3]) * fct.ihm[3] +
-			Utils.parseCoef(param.traitement[0]) * fct.traitement[0] +
-			Utils.parseCoef(param.traitement[1]) * fct.traitement[1] +
-			Utils.parseCoef(param.traitement[2]) * fct.traitement[2] +
-			Utils.parseCoef(param.traitement[3]) * fct.traitement[3]
+		return  (
+			Utils.parseCoef(param.ihm[0]) * Utils.parseInt(fct.ihm[0]) +
+			Utils.parseCoef(param.ihm[1]) * Utils.parseInt(fct.ihm[1]) +
+			Utils.parseCoef(param.ihm[2]) * Utils.parseInt(fct.ihm[2]) +
+			Utils.parseCoef(param.ihm[3]) * Utils.parseInt(fct.ihm[3]) +
+			Utils.parseCoef(param.traitement[0]) * Utils.parseInt(fct.traitement[0]) +
+			Utils.parseCoef(param.traitement[1]) * Utils.parseInt(fct.traitement[1]) +
+			Utils.parseCoef(param.traitement[2]) * Utils.parseInt(fct.traitement[2]) +
+			Utils.parseCoef(param.traitement[3]) * Utils.parseInt(fct.traitement[3])
 		);
 	}
 
@@ -53,6 +53,21 @@ class Utils{
 		}
 
 		// renvoie la valeur parsé
+		return parsed;
+	}
+
+	/**
+	 * parse les valeurs int
+	 * @param  {[string]} value
+	 * @return {[int]}
+	 */
+	static parseInt(value){
+		let parsed = parseInt(value,10);
+
+		if(isNaN(parsed)){
+			return 0;
+		}
+
 		return parsed;
 	}
 
