@@ -11,18 +11,18 @@ const Function = ({fnc,cost, onSetFunctionLabel,onSetFunctionCosts, onRemoveFunc
 
 	return (
 		<tr className="fctRow">
-			<td>#</td>
-			<td><input className="fctRowName" value={fnc.get('name')} type="text" onChange={(evt) => onSetFunctionLabel(evt.target.value)} /></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('ihm').get(0)} onChange={(evt)=>handleChangeCost(evt.target.value,true,0)}/></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('ihm').get(1)} onChange={(evt)=>handleChangeCost(evt.target.value,true,1)}/></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('ihm').get(2)} onChange={(evt)=>handleChangeCost(evt.target.value,true,2) }/></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('ihm').get(3)} onChange={(evt)=>handleChangeCost(evt.target.value,true,3)}/></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('traitement').get(0)} onChange={(evt)=>handleChangeCost(evt.target.value,false,0)}/></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('traitement').get(1)} onChange={(evt)=>handleChangeCost(evt.target.value,false,1)}/></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('traitement').get(2)} onChange={(evt)=>handleChangeCost(evt.target.value,false,2)}/></td>
-			<td><input type="number" min={0} value={fnc.get('costs').get('traitement').get(3)} onChange={(evt)=>handleChangeCost(evt.target.value,false,3)}/></td>
+			<td className="fctRowId">#</td>
+			<td className="fctRowName"><input value={fnc.get('name')} type="text" onChange={(evt) => onSetFunctionLabel(evt.target.value)} /></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('ihm').get(0)} onChange={(evt)=>handleChangeCost(evt.target.value,true,0)}/></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('ihm').get(1)} onChange={(evt)=>handleChangeCost(evt.target.value,true,1)}/></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('ihm').get(2)} onChange={(evt)=>handleChangeCost(evt.target.value,true,2) }/></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('ihm').get(3)} onChange={(evt)=>handleChangeCost(evt.target.value,true,3)}/></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('traitement').get(0)} onChange={(evt)=>handleChangeCost(evt.target.value,false,0)}/></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('traitement').get(1)} onChange={(evt)=>handleChangeCost(evt.target.value,false,1)}/></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('traitement').get(2)} onChange={(evt)=>handleChangeCost(evt.target.value,false,2)}/></td>
+			<td className="fctRowValue"><input type="number" min={0} value={fnc.get('costs').get('traitement').get(3)} onChange={(evt)=>handleChangeCost(evt.target.value,false,3)}/></td>
 			<td className="fctRowCost"><b>{cost}</b></td>
-			<td><Button bsStyle="danger" onClick={()=>onRemoveFunction()}><Glyphicon glyph="trash" /></Button></td>
+			<td className="fctRowDelete"><Button bsStyle="danger" onClick={()=>onRemoveFunction()}><Glyphicon glyph="trash" /></Button></td>
 		</tr>
 	);
 };

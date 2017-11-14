@@ -8,11 +8,41 @@
 	text-align: center;
 }
 
+.fctRow {
+	height : 60px;
+}
 
-.projectChargeCalculatorModule .fctRow .fctRowName{
-	width : 300px;
+.fctRow td{
+	vertical-align: middle !important;
+	position : relative;
+}
+
+.fctRow td input{
+	border : 0px;
+	height: 100%;
+	margin : 0px;
+	position  :absolute;
+	top  :0;
+	left : 0;
+	right : 0;
+	bottom : 0;
+	background: transparent;
+}
+
+.projectChargeCalculatorModule .fctRow .fctRowName input{
+	font-size : 20px;
+	text-align: left;
+	padding : 0 20px;
 }
 
 .projectChargeCalculatorModule .fctRow .fctRowCost{
+	text-align: center;
+	width : 60px;
+}
+
+.projectChargeCalculatorModule .fctRow .fctRowValue,
+.projectChargeCalculatorModule .fctRow .fctRowDelete,
+.projectChargeCalculatorModule .fctRow .fctRowId{
+	width: 60px;
 	text-align: center;
 }
