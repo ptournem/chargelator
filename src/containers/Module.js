@@ -8,11 +8,15 @@ const mapStateToProps = (state,{id}) => {
 	const functions = module.get('fncs');
 	const functionsCosts = functions.map(fnc => state.functions.byId.get(fnc).get('costs')).toJS();
 	const param = state.projects.get('costs').toJS();
+	const {cost:globalCost} = Utils.getGlobalCost(state);
+
+	const moduleCost= Utils.getFunctionsCost(functionsCosts,param);
 
 	return {
 		module : module,
 		functions : functions,
-		cost : Utils.getFunctionsCost(functionsCosts,param)
+		cost : moduleCost,
+		percentage : (globalCost===0 ? 0 :(moduleCost / globalCost))
 	};
 };
 

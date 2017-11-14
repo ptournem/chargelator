@@ -39,7 +39,7 @@ const moduleDetail = (fonctions,isShown) => {
 	);
 }
 
-const Module = ({module, cost, functions ,onAddFunction, onRemoveModule, onSetModuleLabel,onToggleShowModule}) => {
+const Module = ({module, cost,percentage, functions ,onAddFunction, onRemoveModule, onSetModuleLabel,onToggleShowModule}) => {
 	const fonctions = functions.map((func)=> <Function key={func} id={func} />);
 
 	return (
@@ -49,8 +49,11 @@ const Module = ({module, cost, functions ,onAddFunction, onRemoveModule, onSetMo
 					<Col xs={8}>
 						<input type="text" value={module.get('name')} onChange={(evt) =>{onSetModuleLabel(evt.target.value)}}/>
 					</Col>
-					<Col xs={2}>
+					<Col xs={1}>
 						{cost} JEH
+					</Col>
+					<Col xs={1}>
+						{Math.round(percentage*1000)/10} %
 					</Col>
 					<Col xs={2}>
 						<Button onClick={onAddFunction} bsStyle="primary"><Glyphicon glyph="plus"/></Button>
