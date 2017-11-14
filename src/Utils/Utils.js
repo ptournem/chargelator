@@ -166,13 +166,19 @@ class Utils{
 		})
 
 		const nbMonth = total / 20;
-		const nbWeek = Math.ceil(nbMonth *4.3);
-		const minMonth = this.ceilDecimal(2.5*Math.pow(nbMonth,1/3),1);
-		const minWeek = Math.ceil(minMonth*4.3);
-		const optMonth = this.ceilDecimal(1.4 * minMonth,1) ;
-		const optWeek = Math.ceil(optMonth  * 4.3);
+		let nbWeek = nbMonth *4.3;
+		let minMonth = 2.5*Math.pow(nbMonth,1/3);
+		let minWeek = minMonth*4.3;
+		let optMonth = 1.4 * minMonth;
+		let optWeek = optMonth  * 4.3;
 
-		const delay = project.get('parameters').get('delay') - minWeek;
+		nbWeek = Math.ceil(nbWeek);
+		minMonth = this.ceilDecimal(minMonth,1);
+		minWeek = this.ceilDecimal(minWeek,1);
+		optMonth = this.ceilDecimal(optMonth,1);
+		optWeek = Math.ceil(optWeek);
+
+		const delay = Math.ceil(project.get('parameters').get('delay') - minWeek);
 		const complexite = project.get('parameters').get('complexite');
 		const margeSecu = delay < 0 ? -delay : 0;
 
