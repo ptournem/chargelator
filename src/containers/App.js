@@ -11,6 +11,7 @@ const mapStateToProps = (state,{id}) => {
 	const {cost :realCost,totalAfterMarge : globalCost} = Utils.getGlobalCost(state);
 
 	return {
+		user : state.user.get('user'),
 		modules : modules,
 		project : project,
 		cost : realCost,

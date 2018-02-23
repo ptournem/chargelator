@@ -6,6 +6,8 @@ import {createStore} from 'redux';
 import projectChargeCalculatorApp  from './reducers';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import {setUser} from './actions';
+import {auth} from './firebase';
 
 let store = createStore(projectChargeCalculatorApp);
 
@@ -15,3 +17,7 @@ ReactDOM.render(
 		</Provider>,
   document.getElementById('root')
 );
+
+auth.onAuthStateChanged((user) => {
+	store.dispatch(setUser(user));
+});

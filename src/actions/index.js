@@ -27,6 +27,10 @@ export const SET_FUNCTION_LABEL = 'SET_FUNCTION_LABEL';
 export const SET_FUNCTION_COSTS = 'SET_FUNCTION_COSTS';
 export const REMOVE_FUNCTION = 'REMOVE_FUNCTION';
 
+// user
+export const SET_USER = "SET_USER";
+
+
 /**
  * other constant
  */
@@ -245,3 +249,12 @@ export const setProjectParam = (key,value) => {
 			value
 	});
 }
+
+/**
+ * [set user ]
+ * @param {Object} user [user object]
+ * @return {Object}    [action]
+ */
+export const setUser = (user)=> {
+  return actionCreator(SET_USER,{user});
+};

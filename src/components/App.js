@@ -1,5 +1,5 @@
 import React from 'react';
-import{ Button, Glyphicon , Row, Col, Alert, Nav, NavItem} from 'react-bootstrap';
+import{ Button, Glyphicon , Row, Col, Alert, Nav, NavItem, Jumbotron} from 'react-bootstrap';
 import Module from '../containers/Module.js';
 import Global from '../containers/Global.js';
 import ParamCoef from '../containers/ParamCoef.js';
@@ -8,13 +8,13 @@ import '../assets/css/grid-overview.css';
 // hors de la constante pour quelle soit gardé en mémoire
 let counter = 0;
 
-const App = ({project,cost,globalCost, modules, onAddModule, onSetProjectLabel, onSaveAsJson, onReset, onToggleShowParam,setIsDragging,onLoadJson,onSetCurrentTab}) => {
+const App = ({user,project,cost,globalCost, modules, onAddModule, onSetProjectLabel, onSaveAsJson, onReset, onToggleShowParam,setIsDragging,onLoadJson,onSetCurrentTab}) => {
 	const mods = modules.map((module)=><Module key={module.get('id')} id={module.get('id')}/>);
 	const param =  project.get('isParamShown')?<ParamCoef />:"";
 
 	const renderDroppingZone= () => {
 		return (<Alert bsStyle="info">
-          <h4>Vous pouvez glisser votre fichier pour qu'il soit pris en compte</h4>
+          <h4>Vous pouvez glisser votre fichier pour qu il soit pris en compte</h4>
         </Alert>);
 	}
 
@@ -89,6 +89,17 @@ const App = ({project,cost,globalCost, modules, onAddModule, onSetProjectLabel, 
 	}
 
 	const droppingAlert = project.get('isDragging')?renderDroppingZone():'';
+
+	if(!user){
+		return (
+			<Jumbotron>
+				<h1>Bienvenue sur l'application Chargelator !!!</h1>
+				<p>
+					Veuillez-vous connecter pour accéder à l'application !
+				</p>
+			</Jumbotron>
+		);
+	}
 	return	(
 		<div onDrop={loadJson} onDragOver={dragOver} onDragEnter={dragEnter} onDragLeave={dragLeave}>
 			{droppingAlert}
