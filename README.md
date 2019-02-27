@@ -1,5 +1,7 @@
 ## Charge calculator
 
+Demo : https://chargelator.paultournemaine.fr/
+
 # Functionnalities
 * Set Project label
 * Add module
