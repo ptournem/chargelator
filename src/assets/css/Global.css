@@ -1,0 +1,40 @@
+tr.sumup {
+	font-weight:  bold;
+}
+
+#logo {
+	font-size : 36px;
+	color : white;
+	display : block;
+	height: 46px;
+}
+
+#logo .glyphicon{
+	position: relative;
+	top: 5px;
+	left:4px;
+}
+
+#user-box img {
+	height: 48px;
+	display: block;
+	margin: auto;
+}
+#user-box button {
+	margin: auto;
+}
+#user-box .glyphicon.glyphicon-user {
+	font-size : 36px;
+}
+#user-box #user-connection-logout  .glyphicon{
+	display:none;
+	position : absolute;
+	top : 48px;
+	left: 48px;
+	font-size : 20px;
+	color : red;
+}
+
+#user-box:hover #user-connection-logout .glyphicon{
+	display : block;
+}

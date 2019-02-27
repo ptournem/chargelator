@@ -2,3 +2,7 @@
 	vertical-align: middle !important;
 	text-align: center;
 }
+
+.projectChargeCalculatorModule input[type=text], .projectChargeCalculatorModule input[type=number]{
+	width : 100%;
+}
